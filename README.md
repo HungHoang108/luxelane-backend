@@ -1,4 +1,4 @@
-# Fullstack Project
+# LuxeLane Fullstack
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
 ![SASS](https://img.shields.io/badge/SASS-v.4-hotpink)
@@ -8,30 +8,16 @@
 ![EF Core](https://img.shields.io/badge/EF%20Core-v.7-cyan)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-v.14-drakblue)
 
-* Frontend: SASS, TypeScript, React, Redux Toolkit
-* Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
+## About
+The e-commerce website project provides a comprehensive range of features for both customers and administrators. The application includes options for both light and dark modes, catering to user preferences. Users can browse and sort products by category or price, add products to their cart, and register for an account or log in with their email and password. Logged-in customers can create new products, while administrators have the additional capabilities of creating, deleting, and editing products. The application also allows users to remove products from their cart and update the quantities of products within the cart. By developing this project, I gained a deeper understanding of the React lifecycle, state management with Redux, and authentication using JWT token in .NET. I also learned how to integrate TypeScript with React for improved error suggestions and connect the front-end with the back-end. This experience allowed me to apply various technologies in a real-world setting and understand how to integrate different components into a seamless and user-friendly application, contributing to my growth as a developer.
 
-You can follow the same topics as your backend project. It is also possible to select a different topic
+## Technology
+* Frontend: SASS, TypeScript, React, Redux Toolkit. Live demo [https://luxelane.netlify.app/](https://luxelane.netlify.app/). 
+* Frontend repository [https://github.com/HungHoang108/luxelane](https://github.com/HungHoang108/luxelane)
+* Backend: ASP .NET Core, Entity Framework Core, PostgreSQL. Live demo [link](https://luxelane.azurewebsites.net/swagger/index.html).
 
-## Setting Up for folder `Backend`
-
-1. Create `appsettings.json` (and `appsettings.*.json` if needed) file in the root of folder `Backend`. You can refer to the content of file `example.json`
-2. Install all the needed packages:
-    * AutoMapper
-    * AutoMapper.Extensions.Microsoft.DependencyInjection
-    * Microsoft.EntityFrameworkCore
-    * Microsoft.EntityFrameworkCore.Design
-    * Npgsql.EntityFrameworkCore.PostgreSQL
-    \
-   *You can add more packages when necessary.*
-3. You can change .NET Core version to be compatible with your local machine
-
-## Requirements
-
-Below are the steps that you need to finish in order to finish this module
-
-1. Your full stack project should have one git repo to manage both frontend and backend. The shared .git in the root directory is used to push commits to the remote repo. In case you need to deploy frontend and backend to different server, you can inittiate another `.git` folder in each repository. Syntax: `cd frontend` -> `git init` (similar to backend folder). Remember to add `.gitignore` for each folder when you intiate `git` repo.
-2. `frontend` folder is for the react frontend. Start with `backend` first before moving on to `frontend`.
-3. `backend` should have proper file structure, naming convention, and comply with Rest API.
-4. Each topic would have different features. However, the main routes should have CRUD operations, authentication and authorization.
-5. You need to deploy the fullstack project, rewrite `README.md` as instructed earlier in the course.
+## Structure
+* The app uses repository pattern
+* Crud Endpoints: Address, User, Category, Product, Order, OrderProduct
+* Entity relationship: 
+https://drive.google.com/file/d/1H_mUn5GLAEdqPdKDrfL79Al_EuzF4EuO/view?usp=sharing

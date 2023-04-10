@@ -2,13 +2,15 @@
 
 # User-specific files
 backend/appsettings.json
-backend/appsettings.*.json
+backend/appsettings.Development.json
 backend/obj
+backend.Test/obj
 backend/bin
+backend.Test/bin
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
-
+.vscode
 # .NET
 project.lock.json
 project.fragment.lock.json
