@@ -14,10 +14,124 @@ The e-commerce website project provides a comprehensive range of features for bo
 ## Technology
 * Frontend: SASS, TypeScript, React, Redux Toolkit. Live demo [https://luxelane.netlify.app/](https://luxelane.netlify.app/). 
 * Frontend repository [https://github.com/HungHoang108/luxelane](https://github.com/HungHoang108/luxelane)
-* Backend: ASP .NET Core, Entity Framework Core, PostgreSQL. Live demo [link](https://luxelane.azurewebsites.net/swagger/index.html).
+* Backend: ASP .NET Core, Entity Framework Core, Docker, Azure, PostgreSQL. Live demo [https://luxelane.azurewebsites.net](https://luxelane.azurewebsites.net/swagger/index.html).
 
-## Structure
-* The app uses repository pattern
-* Crud Endpoints: Address, User, Category, Product, Order, OrderProduct
-* Entity relationship: 
-https://drive.google.com/file/d/1H_mUn5GLAEdqPdKDrfL79Al_EuzF4EuO/view?usp=sharing
+## Run the app with Docker
+Ensure that you have Docker Desktop installed. Then run below commands on the terminal:
+- docker pull hunghoang108/lux1:latest
+- docker run -p 8080:80 hunghoang108/lux1
+
+Note: The process of containerizing the database is still ongoing.
+
+## Run the app with Github repository
+- Step 1: Fork and clone the project to your local machine
+- Step 2: Cd to cinemaApi repository and install all nescessary nuget packages
+- Step 3: In the appsettings.Development.json file, add your local database address to DefaultConnection
+- Step 4: run command 'dotnet watch' to run the project
+
+## How to test the app
+- Step 1: Cd to backend.Test repository and install all nescessary nuget packages
+- Step 2: run command 'dotnet test'
+
+## Project Structure
+
+```
+fs13-FullStack
+├─ .git
+├─ .gitignore
+├─ backend
+│  ├─ appsettings.Template.json
+│  ├─ Authorizatioin
+│  │  └─ SameUserIdRequirement.cs
+│  ├─ backend.csproj
+│  ├─ Controllers
+│  │  ├─ AddressController.cs
+│  │  ├─ BaseController.cs
+│  │  ├─ CategoryController.cs
+│  │  ├─ OrderController.cs
+│  │  ├─ OrderProductController.cs
+│  │  ├─ ProductController.cs
+│  │  └─ UserController.cs
+│  ├─ Db
+│  │  ├─ ConfigExtension.cs
+│  │  ├─ DataContext.cs
+│  │  └─ DataContextSaveChangesInterceptor.cs
+│  ├─ DTOs
+│  │  ├─ AddressDto.cs
+│  │  ├─ CategoryDto.cs
+│  │  ├─ OrderDto.cs
+│  │  ├─ OrderProductDto.cs
+│  │  ├─ ProductDto.cs
+│  │  └─ UserDto.cs
+│  ├─ Helpers
+│  │  ├─ IntExtension.cs
+│  │  └─ ServiceException.cs
+│  ├─ Mapping
+│  │  └─ MappingProfile.cs
+│  ├─ Middlewares
+│  │  └─ ErrorHandlerMiddleware.cs
+│  ├─ Models
+│  │  ├─ Address.cs
+│  │  ├─ BaseModel.cs
+│  │  ├─ Category.cs
+│  │  ├─ Enum
+│  │  │  └─ OrderStatus.cs
+│  │  ├─ Image.cs
+│  │  ├─ Order.cs
+│  │  ├─ OrderProduct.cs
+│  │  ├─ Product.cs
+│  │  └─ User.cs
+│  ├─ Program.cs
+│  ├─ Properties
+│  │  └─ launchSettings.json
+│  ├─ Repositories
+│  │  ├─ AddressRepo
+│  │  │  ├─ AddressRepo.cs
+│  │  │  └─ IAddressRepo.cs
+│  │  ├─ BaseRepo
+│  │  │  ├─ BaseRepo.cs
+│  │  │  └─ IBaseRepo.cs
+│  │  ├─ CategoryRepo
+│  │  │  ├─ CategoryRepo.cs
+│  │  │  └─ ICategoryRepo.cs
+│  │  ├─ OrderProductRepo
+│  │  │  ├─ IOrderProductRepo.cs
+│  │  │  └─ OrderProductRepo.cs
+│  │  ├─ OrderRepo
+│  │  │  ├─ IOrderRepo.cs
+│  │  │  └─ OrderRepo.cs
+│  │  └─ ProductRepo
+│  │     ├─ IProductRepo.cs
+│  │     └─ ProductRepo.cs
+│  └─ Services
+│     ├─ AddressService
+│     │  ├─ AddressService.cs
+│     │  └─ IAddressService.cs
+│     ├─ BaseService
+│     │  ├─ BaseService.cs
+│     │  └─ IBaseService.cs
+│     ├─ CategoryService
+│     │  ├─ CategoryService.cs
+│     │  └─ ICategoryService.cs
+│     ├─ OrderProductService
+│     │  ├─ IOrderProductService.cs
+│     │  └─ OrderService.cs
+│     ├─ OrderService
+│     │  ├─ IOrderService.cs
+│     │  └─ OrderService.cs
+│     ├─ ProductService
+│     │  ├─ IProductService.cs
+│     │  └─ ProductService.cs
+│     └─ UserService
+│        ├─ ITokenService.cs
+│        ├─ IUserService.cs
+│        ├─ JwtTokenService.cs
+│        └─ UserService.cs
+├─ backend.Test
+│  ├─ AddressRepoTests.cs
+│  ├─ backend.Test.csproj
+│  └─ Usings.cs
+├─ fs13-FullStack.sln
+└─ README.md
+
+```

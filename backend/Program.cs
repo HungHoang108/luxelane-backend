@@ -25,14 +25,19 @@ using Microsoft.IdentityModel.Tokens;
 using static Luxelane.DTOs.AddressDto;
 using static Luxelane.DTOs.CategoryDto;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
 });
+
+var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -41,7 +46,7 @@ builder.Services
         // Fix the JSON cycle issue
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
-builder.Services.AddDbContext<DataContext>();
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(conn));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -154,7 +159,7 @@ app.UseRouting();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
 
