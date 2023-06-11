@@ -26,6 +26,7 @@ using static Luxelane.DTOs.AddressDto;
 using static Luxelane.DTOs.CategoryDto;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +52,34 @@ builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(conn));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+    });
+
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+     {
+           new OpenApiSecurityScheme
+             {
+                 Reference = new OpenApiReference
+                 {
+                     Type = ReferenceType.SecurityScheme,
+                     Id = "Bearer"
+                 }
+             },
+             new string[] {}
+     }
+    });
+});
+
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
@@ -136,18 +164,17 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EF_API v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWTAuthDemo v1"));
 }
 // default, no below code
 else
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EF_API v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWTAuthDemo v1"));
 }
 var option = new RewriteOptions();
 option.AddRedirect("^$", "swagger");
