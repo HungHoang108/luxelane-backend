@@ -15,6 +15,7 @@ namespace Luxelane.Controllers
         }
 
         [HttpGet]
+        [NonAction]
         public override async Task<ActionResult<ICollection<ProductReadDto>>> GetAll([FromQuery] QueryOptions options)
         {
             return Ok(await _productService.GetAllAsync(options));
