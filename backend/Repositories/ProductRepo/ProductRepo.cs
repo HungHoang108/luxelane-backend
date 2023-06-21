@@ -12,35 +12,35 @@ namespace Luxelane.Repositories.ProductRepo
         public ProductRepo(DataContext context, ILogger<BaseRepo<Product>> logger) : base(context, logger)
         {
         }
-        // public string Search { get; set; } = string.Empty;
+
         public async Task<ICollection<Product>> GetAllProductAsync(ProductQueryOptions options)
         {
             var query = _context.Set<Product>().AsNoTracking();
 
-            if (!string.IsNullOrEmpty(options.SortByProduct))
+            if (!string.IsNullOrEmpty(options.SortByProduct.ToString()))
             {
-                switch (options.Sort)
+                switch (options.SortByProduct.ToString())
                 {
                     case "Name":
                         query = options.OrderByProduct == OrderByProduct.DESC ? query.OrderByDescending(x => x.Name) : query.OrderBy(x => x.Name);
                         break;
 
                     case "Price":
-                        query = options.SortBy == SortBy.DESC ? query.OrderByDescending(x => x.Price) : query.OrderBy(x => x.Price);
+                        query = options.OrderByProduct == OrderByProduct.DESC ? query.OrderByDescending(x => x.Price) : query.OrderBy(x => x.Price);
                         break;
 
                     case "Quantity":
-                        query = options.SortBy == SortBy.DESC ? query.OrderByDescending(x => x.Quantity) : query.OrderBy(x => x.Quantity);
+                        query = options.OrderByProduct == OrderByProduct.DESC ? query.OrderByDescending(x => x.Quantity) : query.OrderBy(x => x.Quantity);
                         break;
 
                     default:
                         break;
                 }
             }
-            // if (!string.IsNullOrEmpty(search))
-            // {
-            //     query = query.Where(product => product.Name.Contains(search));
-            // }
+            if (!string.IsNullOrEmpty(options.Search))
+            {
+                query = query.Where(product => product.Name.Contains(options.Search));
+            }
             query = query.Skip(options.Skip).Take(options.Limit);
             return await query.ToListAsync();
         }

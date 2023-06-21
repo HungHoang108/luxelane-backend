@@ -3,6 +3,7 @@ using Luxelane.Models;
 using Luxelane.Repositories.BaseRepo;
 using Luxelane.Services.ProductService;
 using Microsoft.AspNetCore.Mvc;
+using Luxelane.Common;
 
 namespace Luxelane.Controllers
 {
@@ -12,6 +13,12 @@ namespace Luxelane.Controllers
         public ProductController(IProductService service) : base(service)
         {
             _productService = service;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ICollection<ProductReadDto>>> GetAllProduct([FromQuery] ProductQueryOptions options)
+        {
+            return Ok(await _productService.GetAllProductAsync(options));
         }
 
         [HttpGet]

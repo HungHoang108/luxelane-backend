@@ -5,6 +5,7 @@ using Luxelane.Models;
 using Luxelane.Repositories.BaseRepo;
 using Luxelane.Repositories.ProductRepo;
 using Luxelane.Services.BaseService;
+using Luxelane.Common;
 
 namespace Luxelane.Services.ProductService
 {
@@ -16,6 +17,12 @@ namespace Luxelane.Services.ProductService
         public ProductService(IProductRepo productRepo, IMapper mapper, IBaseRepo<Product> repo, ILogger<BaseService<Product, ProductCreateDto, ProductReadDto, ProductUpdateDto>> logger) : base(mapper, repo, logger)
         {
             _productRepo = productRepo;
+        }
+
+        public async Task<ICollection<ProductReadDto>> GetAllProductAsync(ProductQueryOptions options)
+        {
+            var data = await _productRepo.GetAllProductAsync(options);
+            return _mapper.Map<ICollection<ProductReadDto>>(data);
         }
 
         public override async Task<ICollection<ProductReadDto>> GetAllAsync(QueryOptions options)

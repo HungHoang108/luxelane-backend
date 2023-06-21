@@ -8,7 +8,7 @@ namespace Luxelane.Common
 
     public class ProductQueryOptions
     {
-        public SortByProduct SortByProduct { get; set; } 
+        public SortByProduct SortByProduct { get; set; }
         public string Search { get; set; } = string.Empty;
         public OrderByProduct OrderByProduct { get; set; }
         public int Limit { get; set; } = 30;
@@ -24,7 +24,6 @@ namespace Luxelane.Common
     public enum SortByProduct
     {
         Name,
-        Description,
         Price,
         Quantity
     }
